@@ -1,4 +1,7 @@
-state.messages = [
+import React, {Component} from 'react';
+import Message from './Message.jsx';
+
+const messages = [
   {
     type: "incomingMessage",
     content: "I won't be impressed with technology until I can download food.",
@@ -33,3 +36,25 @@ state.messages = [
     content: "Anonymous2 changed their name to NotFunny",
   },
 ]
+
+class MessageList extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      messages
+    }
+  }
+  render() {
+    const messageItems = this.state.messages.map(message => (
+      <Message message ={message}/>
+    ));
+    return (
+      <main className="messages">
+        {messageItems}
+      </main>
+    )
+  }
+}
+
+export default MessageList;
