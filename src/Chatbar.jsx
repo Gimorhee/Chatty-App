@@ -6,11 +6,13 @@ class Chatbar extends Component {
   }
 
   render() {
+    let userName = this.props.currentUser.name.length !== 0 ? this.props.currentUser.name : 'Anonymous';
+
     const keyPress = (event) =>  {
     if(event.key === "Enter") {
       const obj = {
-        id: Math.floor(Math.random() * 10000),
-        username: "Testing",
+        type: "posting message",
+        username: userName,
         content: event.target.value
       }
        this.props.addMessage(obj);
@@ -20,7 +22,7 @@ class Chatbar extends Component {
 
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" placeholder="Your Name (Optional)" value={this.props.currentUser.name}/>
+        <input className="chatbar-username" placeholder="Your Name (Optional)" value={userName}/>
         <input className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyPress = {keyPress} />
       </footer>
     )
