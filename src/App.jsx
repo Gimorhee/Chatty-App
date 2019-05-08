@@ -9,10 +9,12 @@ class App extends Component {
 
     this.socket = undefined
     this.state = {
-      currentUser: { name: "Danny" },
+      currentUser: { name: "" },
       messages: []
     };
     this.addMessage = this.addMessage.bind(this);
+    this.addToPage = this.addToPage.bind(this);
+    this.updateUsername = this.updateUsername.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +30,6 @@ class App extends Component {
       
       this.addToPage(messages)
     }
-
   }
 
   addToPage(message) {
@@ -41,6 +42,10 @@ class App extends Component {
     this.socket.send(JSON.stringify(message))
   }
 
+  updateUsername(username) {
+      this.setState({currentUser: username})
+  }
+
   render() {
     return (
       <div>
@@ -49,6 +54,7 @@ class App extends Component {
         <Chatbar
           currentUser={this.state.currentUser}
           addMessage={this.addMessage}
+          updateUsername={this.updateUsername}
         />
       </div>
     );
