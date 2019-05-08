@@ -23,18 +23,21 @@ class App extends Component {
     }
 
     this.socket.onmessage = (message) => {
-      messages = JSON.parse(message)
-      console.log(messages.data)
+      const messages = JSON.parse(message.data)
+      console.log(messages)
       
-      // this.addMessage(messages)
+      this.addToPage(messages)
     }
+
+  }
+
+  addToPage(message) {
+    const oldMessage = this.state.messages;
+    const newMessage = [...oldMessage, message];
+    this.setState({ messages: newMessage });
   }
 
   addMessage(message) {
-    // const oldMessage = this.state.messages;
-    // const newMessage = [...oldMessage, message];
-    // this.setState({ messages: newMessage });
-
     this.socket.send(JSON.stringify(message))
   }
 

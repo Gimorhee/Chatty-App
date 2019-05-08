@@ -1,5 +1,7 @@
 const express = require("express");
-const SocketServer = require("ws").Server;
+const webSocket = require("ws");
+const SocketServer = webSocket.Server;
+
 const uuid = require("uuid");
 
 // Set the port to 3001
@@ -18,7 +20,7 @@ const wss = new SocketServer({ server });
 
 wss.broadcast = function braodcast(data) {
   wss.clients.forEach(function each(client) {
-    if (client.readyState === SocketServer.OPEN) {
+    if (client.readyState === webSocket.OPEN) {
       client.send(JSON.stringify(data));
     }
   });
@@ -33,9 +35,8 @@ wss.on("connection", ws => {
   ws.on("message", function incoming(data) {
     let newData = JSON.parse(data);
     newData.id = uuid();
-    console.log(`${newData.username} said ${newData.content}`);
-    console.log("Got a new message: ", newData);
-    console.log(`tests: `, wss.broadcast(data));
+    // console.log(`${newData.username} said ${newData.content}`);
+    // console.log("Got a new message: ", newData);
     wss.broadcast(newData);
   });
 
