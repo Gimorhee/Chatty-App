@@ -56,10 +56,11 @@ body {
       padding: 0 10px;
     }
 
-    .notification {
+    .notification,
+    .notification-content {
       overflow: hidden;
       margin: 5px;
-      padding: 0 15px;
+      padding: 0 5px;
       font-style: italic;
     }
 
