@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 
 class Chatbar extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     let userName =
       this.props.currentUser.name.length !== 0
@@ -13,7 +10,7 @@ class Chatbar extends Component {
     const keyPress = event => {
       if (event.key === "Enter") {
         const obj = {
-          type: "posting message",
+          type: "incomingMessage",
           username: userName,
           content: event.target.value
         };
@@ -24,11 +21,14 @@ class Chatbar extends Component {
 
     const enterKey = event => {
       if (event.key === "Enter") {
-        let userName = {
+        let clientName = {
+          type: "postNotification",
+          oldName: userName,
           name: event.target.value
         };
-        this.props.updateUsername(userName);
+        this.props.updateUsername(clientName);
         event.target.value = "";
+        this.props.addMessage(clientName);
       }
     };
 

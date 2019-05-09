@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.socket = undefined
+    this.socket = undefined;
     this.state = {
       currentUser: { name: "" },
       messages: []
@@ -20,16 +20,14 @@ class App extends Component {
   componentDidMount() {
     this.socket = new WebSocket("ws://localhost:3001");
 
-    this.socket.onopen = (event) => {
+    this.socket.onopen = event => {
       console.log("Connected to server");
-    }
+    };
 
-    this.socket.onmessage = (message) => {
-      const messages = JSON.parse(message.data)
-      console.log(messages)
-      
-      this.addToPage(messages)
-    }
+    this.socket.onmessage = message => {
+      const messages = JSON.parse(message.data);
+      this.addToPage(messages);
+    };
   }
 
   addToPage(message) {
@@ -39,11 +37,11 @@ class App extends Component {
   }
 
   addMessage(message) {
-    this.socket.send(JSON.stringify(message))
+    this.socket.send(JSON.stringify(message));
   }
 
   updateUsername(username) {
-      this.setState({currentUser: username})
+    this.setState({ currentUser: username });
   }
 
   render() {
@@ -60,6 +58,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;

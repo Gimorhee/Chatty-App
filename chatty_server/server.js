@@ -35,8 +35,9 @@ wss.on("connection", ws => {
   ws.on("message", function incoming(data) {
     let newData = JSON.parse(data);
     newData.id = uuid();
-    // console.log(`${newData.username} said ${newData.content}`);
-    // console.log("Got a new message: ", newData);
+    if(newData.type === "postNotification") {
+      newData.type = "incomingNotification";
+    }
     wss.broadcast(newData);
   });
 
