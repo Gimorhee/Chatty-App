@@ -10,7 +10,7 @@ class Chatbar extends Component {
     const keyPress = event => {
       if (event.key === "Enter") {
         const obj = {
-          type: "incomingMessage",
+          type: "postMessage",
           username: userName,
           content: event.target.value
         };

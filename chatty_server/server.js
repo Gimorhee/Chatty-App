@@ -38,6 +38,10 @@ wss.on("connection", ws => {
     if(newData.type === "postNotification") {
       newData.type = "incomingNotification";
     }
+
+    if(newData.type === "postMessage") {
+      newData.type = "incomingMessage";
+    }
     wss.broadcast(newData);
   });
 
