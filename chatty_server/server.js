@@ -34,12 +34,14 @@ wss.on("connection", ws => {
   let userNumberData = {
     clientNumber: wss.clients.size
   }
+  wss.broadcast(userNumberData);
 
-  wss.clients.forEach(function countUser(client) {
-    if(client.readyState === webSocket.OPEN) {
-      client.send(JSON.stringify(userNumberData));
-    }
-  });
+  let userColor = ["#0900c3", "#00a8b5", "#8ed6ff", "#2f89fc", "#6c5ce7", "#32dbc6"];
+  let randomNumber = Math.floor(Math.random()* 6);
+  let chosenColor = {
+    randomColor: userColor[randomNumber],
+  }
+  wss.broadcast(chosenColor);
 
   ws.on("message", function incoming(data) {
     let newData = JSON.parse(data);
@@ -47,10 +49,10 @@ wss.on("connection", ws => {
     if(newData.type === "postNotification") {
       newData.type = "incomingNotification";
     }
-
     if(newData.type === "postMessage") {
       newData.type = "incomingMessage";
     }
+
     wss.broadcast(newData);
   });
 
@@ -61,11 +63,6 @@ wss.on("connection", ws => {
     let userNumberData = {
       clientNumber: wss.clients.size
     }
-
-    wss.clients.forEach(function countUser(client) {
-      if(client.readyState === webSocket.OPEN) {
-        client.send(JSON.stringify(userNumberData));
-      }
-    });
+    wss.broadcast(userNumberData);
   });
 });

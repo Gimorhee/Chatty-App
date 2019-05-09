@@ -5,7 +5,7 @@ class Navbar extends Component {
     let userCount = this.props.clientNumber > 1 ? "users" : "user";
     return (
       <nav className="navbar">
-      <a className="navbar-brand" href="/">Chatty</a> <span className="client-count">{this.props.clientNumber} {userCount} online</span>
+      <a className="navbar-brand" href="/"><i className="far fa-comments"></i>Chatty</a> <span className="client-count">{this.props.clientNumber} {userCount} online</span>
       </nav>
     )
   }

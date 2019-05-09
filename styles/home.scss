@@ -32,10 +32,12 @@ body {
 
     .chatbar-message {
       flex: 8;
+      color: #0060ca
     }
 
     .chatbar-username {
       flex: 2;
+      color: #0060ca
     }
 
     .message {
@@ -104,5 +106,5 @@ body {
       line-height: 30px;
       text-decoration: none;
       padding: 15px;
-      font-size: 18px;
+      font-size: 19px;
     }

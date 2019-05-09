@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       currentUser: { name: "" },
       messages: [],
-      clientNumber: 0
+      clientNumber: 0,
+      userColor: ""
     };
     this.addMessage = this.addMessage.bind(this);
     this.addToPage = this.addToPage.bind(this);
@@ -25,12 +26,20 @@ class App extends Component {
       console.log("Connected to server");
     };
 
+    console.log(this.state)
+
     this.socket.onmessage = message => {
-      let clientNumberData = JSON.parse(message.data);
-      if(clientNumberData.clientNumber) {
-        this.setState({clientNumber: clientNumberData.clientNumber});
+      let clientData = JSON.parse(message.data);
+      if(clientData.clientNumber) {
+        this.setState({clientNumber: clientData.clientNumber});
         return;
       } 
+      
+      if(this.state.userColor === "" && clientData.randomColor) {
+        console.log(`this is clientdata.randomcolor`,clientData.randomColor)
+        this.setState({userColor: clientData.randomColor});
+        return;
+      }
 
       const messages = JSON.parse(message.data);
       this.addToPage(messages);
@@ -44,6 +53,7 @@ class App extends Component {
   }
 
   addMessage(message) {
+    message.userColor = this.state.userColor;
     this.socket.send(JSON.stringify(message));
   }
 
@@ -55,7 +65,7 @@ class App extends Component {
     return (
       <div>
         <Navbar clientNumber={this.state.clientNumber}/>
-        <MessageList messages={this.state.messages} />
+        <MessageList messages={this.state.messages}/>
         <Chatbar
           currentUser={this.state.currentUser}
           addMessage={this.addMessage}
