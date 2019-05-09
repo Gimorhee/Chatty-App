@@ -4,7 +4,7 @@ class Navbar extends Component {
   render() {
     return (
       <nav className="navbar">
-      <a className="navbar-brand" href="/">Chatty</a>
+      <a className="navbar-brand" href="/">Chatty + {this.props.clientNumber}</a>
       </nav>
     )
   }
