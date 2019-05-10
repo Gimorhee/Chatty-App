@@ -26,8 +26,6 @@ class App extends Component {
       console.log("Connected to server");
     };
 
-    console.log(this.state)
-
     this.socket.onmessage = message => {
       let clientData = JSON.parse(message.data);
       if(clientData.clientNumber) {
@@ -36,7 +34,6 @@ class App extends Component {
       } 
       
       if(this.state.userColor === "" && clientData.randomColor) {
-        console.log(`this is clientdata.randomcolor`,clientData.randomColor)
         this.setState({userColor: clientData.randomColor});
         return;
       }
