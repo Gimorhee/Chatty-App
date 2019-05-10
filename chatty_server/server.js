@@ -34,38 +34,38 @@ wss.on("connection", ws => {
   console.log("Client connected");
   let userNumberData = {
     clientNumber: wss.clients.size
-  }
+  };
   wss.broadcast(userNumberData);
-  
+
   //Randomly assgining colors to each users
   let userColor = ["#0900c3", "#00a8b5", "#8ed6ff", "#2f89fc", "#6c5ce7", "#32dbc6"];
-  let randomNumber = Math.floor(Math.random()* 6);
+  let randomNumber = Math.floor(Math.random() * 6);
   let chosenColor = {
-    randomColor: userColor[randomNumber],
-  }
+    randomColor: userColor[randomNumber]
+  };
   wss.broadcast(chosenColor);
 
   //Handling data from client
   ws.on("message", function incoming(data) {
     let newData = JSON.parse(data);
     newData.id = uuid();
-    if(newData.type === "postNotification") {
+    if (newData.type === "postNotification") {
       newData.type = "incomingNotification";
     }
-    if(newData.type === "postMessage") {
+    if (newData.type === "postMessage") {
       newData.type = "incomingMessage";
     }
 
     wss.broadcast(newData);
   });
 
-  // Set up a callback for when a client closes the socket. This usually means they closed their browser.
+  // Set up a callback for when a client closes the socket. This usually means they closed their browser
   ws.on("close", () => {
-    console.log("Client disconnected")
+    console.log("Client disconnected");
 
     let userNumberData = {
       clientNumber: wss.clients.size
-    }
+    };
     wss.broadcast(userNumberData);
   });
 });

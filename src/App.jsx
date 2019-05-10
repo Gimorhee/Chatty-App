@@ -6,7 +6,7 @@ import Chatbar from "./Chatbar.jsx";
 class App extends Component {
   constructor(props) {
     super(props);
-    
+
     //Initial state settings.
     this.socket = undefined;
     this.state = {
@@ -22,7 +22,6 @@ class App extends Component {
     this.updateUsername = this.updateUsername.bind(this);
   }
 
-  
   componentDidMount() {
     //Connecting to websocket server
     this.socket = new WebSocket("ws://localhost:3001");
@@ -38,14 +37,14 @@ class App extends Component {
       let clientData = JSON.parse(message.data);
 
       //Checking if received data has clientNumber key, if so, setting a this.state
-      if(clientData.clientNumber) {
-        this.setState({clientNumber: clientData.clientNumber});
+      if (clientData.clientNumber) {
+        this.setState({ clientNumber: clientData.clientNumber });
         return;
-      } 
-      
+      }
+
       //Checking if received data has randomColor key, if so, setting a this.state
-      if(this.state.userColor === "" && clientData.randomColor) {
-        this.setState({userColor: clientData.randomColor});
+      if (this.state.userColor === "" && clientData.randomColor) {
+        this.setState({ userColor: clientData.randomColor });
         return;
       }
 
@@ -68,7 +67,7 @@ class App extends Component {
     this.socket.send(JSON.stringify(message));
   }
 
-  //updateUsername method: updating username 
+  //updateUsername method: updating username
   updateUsername(username) {
     this.setState({ currentUser: username });
   }
@@ -77,8 +76,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar clientNumber={this.state.clientNumber}/>
-        <MessageList messages={this.state.messages}/>
+        <Navbar clientNumber={this.state.clientNumber} />
+        <MessageList messages={this.state.messages} />
         <Chatbar
           currentUser={this.state.currentUser}
           addMessage={this.addMessage}

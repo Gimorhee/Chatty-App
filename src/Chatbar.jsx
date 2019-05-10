@@ -8,30 +8,30 @@ class Chatbar extends Component {
         ? this.props.currentUser.name
         : "Anonymous";
 
-    //If user input some message and press enter, the data (obj) is handled with addMessage method
+    //If user enter some message and press enter, the data (messageInfo) is handled with addMessage method
     const keyPress = event => {
       if (event.key === "Enter") {
-        const obj = {
+        const messageInfo = {
           type: "postMessage",
           username: userName,
           content: event.target.value
         };
-        this.props.addMessage(obj);
+        this.props.addMessage(messageInfo);
         event.target.value = "";
       }
     };
 
-    //If user input nickname and press enter, the data (obj) is handled with updateUsername and addMessage methods
+    //If user enter nickname and press enter, the data (clientInfo) is handled with updateUsername and addMessage methods
     const enterKey = event => {
       if (event.key === "Enter") {
-        let clientName = {
+        let clientInfo = {
           type: "postNotification",
           oldName: userName,
           name: event.target.value
         };
-        this.props.updateUsername(clientName);
+        this.props.updateUsername(clientInfo);
         event.target.value = "";
-        this.props.addMessage(clientName);
+        this.props.addMessage(clientInfo);
       }
     };
 

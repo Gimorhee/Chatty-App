@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 class Message extends Component {
   render() {
-
     //Setting user color
     const messageStyle = {
       color: this.props.message.userColor
@@ -11,14 +10,16 @@ class Message extends Component {
     //Setting regular expression for image URLs
     const regex = /\.(jpg|png|gif|jpeg)\b/;
 
-    //Checking if there is URLs (as an input) and handling differently
+    //Checking if there is a URL (as an input) and handling accordingly
     let isThereImage = regex.test(this.props.message.content) ? (
-      <div className="image-div"><img className="image" src={this.props.message.content} /></div>
+      <div className="image-div">
+        <img className="image" src={this.props.message.content} />
+      </div>
     ) : (
       <span className="message-content">{this.props.message.content}</span>
     );
-    
-    //Checking the type of the data and handling differently accordingly
+
+    //Checking the type of the data and handling accordingly
     return this.props.message.type === "incomingNotification" ? (
       <div className="notification">
         <span className="notification-content">
