@@ -4,7 +4,10 @@ Chatty App
 Chatty App is a chat web SPA (Single Page Application which allows users to communicate with each other without having to register accounts. A very popular front-end library, React is used. Modern tools for Node including Webpack and Babel as well as Websocket, a computer communications protocol that provides full-duplex communication channels over a single TCP connection are used.
 
 ### Final Product
-
+![ScreenShot1](https://github.com/Gimorhee/Chatty-App/blob/master/images/ScreenShot1.png)
+![ScreenShot2](https://github.com/Gimorhee/Chatty-App/blob/master/images/ScreenShot2.png)
+![ScreenShot3](https://github.com/Gimorhee/Chatty-App/blob/master/images/ScreenShot3.png)
+![ScreenShot4](https://github.com/Gimorhee/Chatty-App/blob/master/images/ScreenShot4.png)
 
 ### Getting Started
 1. Fork this repository, then clone your fork of this repository
