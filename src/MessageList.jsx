@@ -7,7 +7,7 @@ class MessageList extends Component {
   }
 
   render() {
-    
+    //Mapping through the array of messages and sending the data to the message componenet as prop
     const messageItems = this.props.messages.map(message => (
       <Message key={message.id} message ={message}/>
     ));

@@ -18,6 +18,7 @@ const server = express()
 // Create the WebSockets server
 const wss = new SocketServer({ server });
 
+//Broadcasting to all the users
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
     if (client.readyState === webSocket.OPEN) {
@@ -35,7 +36,8 @@ wss.on("connection", ws => {
     clientNumber: wss.clients.size
   }
   wss.broadcast(userNumberData);
-
+  
+  //Randomly assgining colors to each users
   let userColor = ["#0900c3", "#00a8b5", "#8ed6ff", "#2f89fc", "#6c5ce7", "#32dbc6"];
   let randomNumber = Math.floor(Math.random()* 6);
   let chosenColor = {
@@ -43,6 +45,7 @@ wss.on("connection", ws => {
   }
   wss.broadcast(chosenColor);
 
+  //Handling data from client
   ws.on("message", function incoming(data) {
     let newData = JSON.parse(data);
     newData.id = uuid();
