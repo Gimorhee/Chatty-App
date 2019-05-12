@@ -13,7 +13,7 @@ class Message extends Component {
     //Checking if there is a URL (as an input) and handling accordingly
     let isThereImage = regex.test(this.props.message.content) ? (
       <div className="image-div">
-        <img className="image" src={this.props.message.content} />
+        <img className="image" src={this.props.message.content}/>
       </div>
     ) : (
       <span className="message-content">{this.props.message.content}</span>

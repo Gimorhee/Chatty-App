@@ -30,7 +30,7 @@ class Chatbar extends Component {
           name: event.target.value
         };
         this.props.updateUsername(clientInfo);
-        event.target.value = "";
+        event.target.value = event.target.value;
         this.props.addMessage(clientInfo);
       }
     };
@@ -40,7 +40,7 @@ class Chatbar extends Component {
       <footer className="chatbar">
         <input
           className="chatbar-username"
-          placeholder={userName}
+          placeholder="Your name (optional)"
           onKeyPress={enterKey}
         />
         <input
